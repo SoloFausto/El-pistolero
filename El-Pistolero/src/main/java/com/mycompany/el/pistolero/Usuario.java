@@ -14,8 +14,10 @@ public class Usuario {
     String passw;
     String nombre;
     
-Usuario(String Usrname,String email,String passw,String Nombre){
-            
+Usuario(String Usrname,String email,String passw,String nombre){
+            this.Usrname = Usrname;
+            this.email = email;
+            this.nombre = nombre;
         }
     public String getUsrname() {
         return Usrname;
