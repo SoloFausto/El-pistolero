@@ -8,11 +8,16 @@ package com.mycompany.el.pistolero;
  * @author fausto
  */
         import java.util.Scanner;
+
+import com.mycompany.el.pistolero.Pantalla;
+
 import java.io.*;  
 public class Coreapp {
         public static void main(String[] args) throws Exception{
+    		Pantalla pant1 = new Pantalla(400,300);
+    		pant1.setVisible(true);
+    		
 
-    Usuario[] usuarios = new Usuario[10];
-    Usuario.crearUsuario(Usrname, email, passw, nombre, file);
+    
         }
   }
