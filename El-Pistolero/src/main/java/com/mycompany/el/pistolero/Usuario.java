@@ -14,7 +14,7 @@ public class Usuario {
     String passw;
     String nombre;
     
-        public static void crearUsuario(String Usrname,String email,String passw,String Nombre,String file){
+Usuario(String Usrname,String email,String passw,String Nombre){
             
         }
     public String getUsrname() {
