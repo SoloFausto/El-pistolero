@@ -11,11 +11,7 @@ package com.mycompany.el.pistolero;
 import java.io.*;  
 public class Coreapp {
         public static void main(String[] args) throws Exception{
-    String file = ("Usuarios.txt");
-    String Usrname = "Usuario12";
-    String email = "fausto@fausto.com";
-    String passw = "1234";
-    String nombre = "Fausto";
+
     Usuario[] usuarios = new Usuario[10];
     Usuario.crearUsuario(Usrname, email, passw, nombre, file);
         }
