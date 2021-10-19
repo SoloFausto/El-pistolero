@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.event.*;
 public class Pantalla extends JFrame implements ActionListener{
 	JButton boton;
-	JButton boton2;
 	JLabel label1;
 	private JTextField texto;
 	
