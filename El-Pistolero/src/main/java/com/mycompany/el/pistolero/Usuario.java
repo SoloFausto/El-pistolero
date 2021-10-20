@@ -18,6 +18,7 @@ Usuario(String Usrname,String email,String passw,String nombre){
             this.Usrname = Usrname;
             this.email = email;
             this.nombre = nombre;
+            this.passw = passw;
         }
     public String getUsrname() {
         return Usrname;

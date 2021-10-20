@@ -1,7 +1,7 @@
 package com.mycompany.el.pistolero;
 import javax.swing.*;
 import java.awt.event.*;
-public class Pantalla extends JFrame implements ActionListener{
+public abstract class Pantalla extends JFrame implements ActionListener{
 	JButton boton;
 	JLabel label1;
 	private JTextField texto;
