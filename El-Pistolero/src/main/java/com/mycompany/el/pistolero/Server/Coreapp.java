@@ -24,8 +24,8 @@ BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInp
             //System.out.println(compararUsuario(usuario1,usuario2));
 
 while (in.read() != -1){
-    String msg = in.readLine();
-        System.out.println(msg);
+   String line = in.readLine();
+        System.out.println(line);
         
         }
         }
