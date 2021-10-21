@@ -17,12 +17,12 @@ public class Coreapp {
 Usuario[] usrs = new Usuario[10];
 // Usuario(String Usrname,String email,String passw,String nombre)
 Usuario usuario1 = new Usuario("Lucas","lucas@luacs.com","luucas1","Lucas T");
-Usuario usuario2 = new Usuario("Lucas","lucas@luacs.com","luucas1","Lucas T");
-            System.out.println(compararUsuarioLogin(usuario1,usuario2));
+Usuario usuario2 = new Usuario("Lucas11","lucas@luacs.com","luucas1","Lucas T");
+            System.out.println(compararUsuario(usuario1,usuario2));
 
     
         }
-        public static boolean compararUsuarioLogin(Usuario usr1,Usuario usr2){
+        public static boolean compararUsuario(Usuario usr1,Usuario usr2){
             if(usr1.getPassw().equals(usr2.getPassw())&usr1.getUsrname().equals(usr2.getUsrname())){
                     return true;
             }

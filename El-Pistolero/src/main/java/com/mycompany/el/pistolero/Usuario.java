@@ -13,7 +13,7 @@ public class Usuario {
     String email;
     String passw;
     String nombre;
-    
+    Usuario(){}
 Usuario(String Usrname,String email,String passw,String nombre){
             this.Usrname = Usrname;
             this.email = email;
