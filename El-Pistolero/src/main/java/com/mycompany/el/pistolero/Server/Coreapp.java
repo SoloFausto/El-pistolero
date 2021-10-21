@@ -33,10 +33,10 @@ usuarioent.setNombre("N/A");
 usuarioent.setEmail(in.readLine());
 usuarioent.setNombre(in.readLine());
 }
-            System.out.println("Email: "+usuarioent.getEmail());
-            System.out.println("passw: "+usuarioent.getPassw());
-            System.out.println("nombre: "+usuarioent.getNombre());
-            System.out.println("username: "+usuarioent.getUsrname());
+ System.out.println("username: "+usuarioent.getUsrname());  
+ System.out.println("passw: "+usuarioent.getPassw());
+System.out.println("Email: "+usuarioent.getEmail());
+System.out.println("nombre: "+usuarioent.getNombre());
             System.out.println(compararUsuario(usuario1,usuarioent));
         }
         public static boolean compararUsuario(Usuario usr1,Usuario usr2){
