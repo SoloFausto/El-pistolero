@@ -14,7 +14,7 @@ public class Usuario {
     String passw;
     String nombre;
     public Usuario(){}
-public Usuario(String Usrname,String email,String passw,String nombre){
+public Usuario(String Usrname,String passw,String email,String nombre){
             this.Usrname = Usrname;
             this.email = email;
             this.nombre = nombre;

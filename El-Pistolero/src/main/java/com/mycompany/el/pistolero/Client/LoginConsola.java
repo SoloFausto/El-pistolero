@@ -22,35 +22,35 @@ BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInp
 Scanner entrada = new Scanner (System.in);
         System.out.println("Bienvenido, que le gustaria hacer a continuacion?");
         System.out.println("1:Ingresar, 2:Registrarse");
-        
         int eleccion = entrada.nextInt();
-        
         if(eleccion == 1){
-        Usuario usuariolog = new Usuario();
         System.out.println("Nombre de usuario:");
             String nombreusuarioscn = entrada.next();
-                usuariolog.setUsrname(nombreusuarioscn);
+                msj(out,nombreusuarioscn);
         System.out.println("Contraseña:");
             String passw = entrada.next();
-                usuariolog.setPassw(passw);
+                msj(out,passw);
+                msj(out,"a0");
         }
         else if (eleccion == 2){
-        Usuario usuarioreg = new Usuario();
         System.out.println("Nombre de usuario:");
             String nombreusuarioscn = entrada.next();
-              usuarioreg.setUsrname(nombreusuarioscn);
-        System.out.println("Email:");
-            String emailscn = entrada.next();
-                usuarioreg.setEmail(emailscn);
-        System.out.println("Nombre:");
-            String nombrescn = entrada.next();
-                usuarioreg.setNombre(nombrescn);
+            msj(out,nombreusuarioscn);
         System.out.println("Contraseña:");
             String passw = entrada.next();
-                usuarioreg.setPassw(passw);
-                
+            msj(out,passw);
+        System.out.println("Email:");
+            String emailscn = entrada.next();
+            msj(out,emailscn);
+        System.out.println("Nombre:");
+            String nombrescn = entrada.next();
+            msj(out,nombrescn);
         }
+        
     
     }
+         static void msj(PrintWriter out,String str){
+     out.println(str);
+     }
     
 }

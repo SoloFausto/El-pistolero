@@ -19,15 +19,25 @@ BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInp
             System.out.println("Terminado la parte de sockets");
 //Usuario[] usrs = new Usuario[10];
 // Usuario(String Usrname,String email,String passw,String nombre)
-//Usuario usuario1 = new Usuario("Lucas","lucas@luacs.com","luucas1","Lucas T");
+Usuario usuario1 = new Usuario("lucas","a","lucas@luacs.com","Lucas T");
+Usuario usuario2 = new Usuario("lucas\n","a\n","lucas@luacs.com","Lucas T");
 //Usuario usuario2 = new Usuario("Lucas11","lucas@luacs.com","luucas1","Lucas T");
-            //System.out.println(compararUsuario(usuario1,usuario2));
 
-while (in.read() != -1){
-   String line = in.readLine();
-        System.out.println(line);
-        
-        }
+Usuario usuarioent = new Usuario();
+usuarioent.setUsrname(in.readLine());
+usuarioent.setPassw(in.readLine());
+if(in.readLine().equals("a0")){
+usuarioent.setEmail("N/A");
+usuarioent.setNombre("N/A");
+} else {
+usuarioent.setEmail(in.readLine());
+usuarioent.setNombre(in.readLine());
+}
+            System.out.println("Email: "+usuarioent.getEmail());
+            System.out.println("passw: "+usuarioent.getPassw());
+            System.out.println("nombre: "+usuarioent.getNombre());
+            System.out.println("username: "+usuarioent.getUsrname());
+            System.out.println(compararUsuario(usuario1,usuarioent));
         }
         public static boolean compararUsuario(Usuario usr1,Usuario usr2){
             if(usr1.getPassw().equals(usr2.getPassw())&usr1.getUsrname().equals(usr2.getUsrname())){
@@ -36,6 +46,6 @@ while (in.read() != -1){
             else{
             return false;
             }
-
+            
         }
-  }
+}
