@@ -30,7 +30,9 @@ Scanner entrada = new Scanner (System.in);
         System.out.println("Contraseña:");
             String passw = entrada.next();
                 msj(out,passw);
-                msj(out,"a0");
+                msj(out,"N/A");
+                msj(out,"N/A");
+                //msj(out,"a0");
         }
         else if (eleccion == 2){
         System.out.println("Nombre de usuario:");

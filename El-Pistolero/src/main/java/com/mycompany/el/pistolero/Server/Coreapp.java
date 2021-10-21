@@ -26,13 +26,9 @@ Usuario usuario2 = new Usuario("lucas\n","a\n","lucas@luacs.com","Lucas T");
 Usuario usuarioent = new Usuario();
 usuarioent.setUsrname(in.readLine());
 usuarioent.setPassw(in.readLine());
-if(in.readLine().equals("a0")){
-usuarioent.setEmail("N/A");
-usuarioent.setNombre("N/A");
-} else {
 usuarioent.setEmail(in.readLine());
 usuarioent.setNombre(in.readLine());
-}
+
  System.out.println("username: "+usuarioent.getUsrname());  
  System.out.println("passw: "+usuarioent.getPassw());
 System.out.println("Email: "+usuarioent.getEmail());
