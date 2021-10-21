@@ -1,4 +1,4 @@
-package com.mycompany.el.pistolero;
+package com.mycompany.el.pistolero.Client;
 import javax.swing.*;
 import java.awt.event.*;
 public abstract class Pantalla extends JFrame implements ActionListener{

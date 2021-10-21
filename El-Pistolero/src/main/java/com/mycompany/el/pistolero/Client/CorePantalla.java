@@ -1,4 +1,4 @@
-package com.mycompany.el.pistolero;
+package com.mycompany.el.pistolero.Client;
 
 public class CorePantalla {
 

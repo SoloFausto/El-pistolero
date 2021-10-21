@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.el.pistolero;
+package com.mycompany.el.pistolero.Server;
 
 /**
  *
@@ -13,8 +13,8 @@ public class Usuario {
     String email;
     String passw;
     String nombre;
-    Usuario(){}
-Usuario(String Usrname,String email,String passw,String nombre){
+    public Usuario(){}
+public Usuario(String Usrname,String email,String passw,String nombre){
             this.Usrname = Usrname;
             this.email = email;
             this.nombre = nombre;
