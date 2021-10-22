@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.*;
-public class Pantalla extends JFrame{
+public class Pantalla extends JFrame implements ActionListener{
 	JButton boton;
 	JLabel label1;
 	String texto;
@@ -16,20 +16,32 @@ public class Pantalla extends JFrame{
 		this.setSize(largo, ancho);
 		this.setLayout(null);
 		
+		
 		campo1 = new JTextField();
 		campo1.setBounds(110,50,150,30);
 		this.add(campo1);
 		texto= campo1.getText();
+		
+		campo1.addActionListener(new ActionListener(){
+			  public void actionPerformed (){
+			  //Acciones
+			  }
+			});
 //text
-		label1 = new JLabel(texto);
-		label1.setBounds(110,10,500,30);
+		label1 = new JLabel("pulsa entrar");
+		label1.setBounds(150,150,500,30);
 		this.add(label1);
 //label
-		this.boton = new JButton("Saludar");
-		boton.setBounds(140, 65,100, 50);
+		this.boton = new JButton("Entrar");
+		boton.setBounds(135, 100,100, 50);
 		this.add(boton);
 //botón
 
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }
