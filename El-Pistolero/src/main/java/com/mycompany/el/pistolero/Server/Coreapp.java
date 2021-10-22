@@ -17,10 +17,7 @@ Socket clientSocket = serverSocket.accept();
 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             System.out.println("Terminado la parte de sockets");
-//Usuario[] usrs = new Usuario[10];
-// Usuario(String Usrname,String email,String passw,String nombre)
-Usuario usuario1 = new Usuario("lucas","a","lucas@luacs.com","Lucas T");
-Usuario usuario2 = new Usuario("lucas\n","a\n","lucas@luacs.com","Lucas T");
+Usuario[] usrs = new Usuario[1];
 //Usuario usuario2 = new Usuario("Lucas11","lucas@luacs.com","luucas1","Lucas T");
 
 Usuario usuarioent = new Usuario();
@@ -28,12 +25,28 @@ usuarioent.setUsrname(in.readLine());
 usuarioent.setPassw(in.readLine());
 usuarioent.setEmail(in.readLine());
 usuarioent.setNombre(in.readLine());
+String eleccion = in.readLine();
+if(eleccion.equals("1")){
+    for(int i=0; i<usrs.length; i++){
+if(compararUsuario(usrs[i],usuarioent)==true){
+msj(out,"OK");
+break;
+}
+else{
+    msj(out,"NO");
+}
+}
+}
+else if (eleccion.equals("2")){
+    RegUsuario(usrs,usuarioent);
+
+}
+            System.out.println("Eleccion="+eleccion);
 
  System.out.println("username: "+usuarioent.getUsrname());  
  System.out.println("passw: "+usuarioent.getPassw());
 System.out.println("Email: "+usuarioent.getEmail());
 System.out.println("nombre: "+usuarioent.getNombre());
-            System.out.println(compararUsuario(usuario1,usuarioent));
         }
         public static boolean compararUsuario(Usuario usr1,Usuario usr2){
             if(usr1.getPassw().equals(usr2.getPassw())&usr1.getUsrname().equals(usr2.getUsrname())){
@@ -44,4 +57,19 @@ System.out.println("nombre: "+usuarioent.getNombre());
             }
             
         }
+            public static Usuario[] RegUsuario(Usuario arr[], Usuario usuarioreg)
+    {
+        int i;
+        Usuario newarr[] = new Usuario[arr.length+ 1];
+        for (i = 0; i < arr.length; i++)
+            newarr[i] = arr[i];
+  
+        newarr[newarr.length-1] = usuarioreg;
+  
+        return newarr;
+    }
+                     static void msj(PrintWriter out,String str){
+     out.println(str);
+     }
+  
 }

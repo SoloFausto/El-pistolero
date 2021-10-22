@@ -22,8 +22,8 @@ BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInp
 Scanner entrada = new Scanner (System.in);
         System.out.println("Bienvenido, que le gustaria hacer a continuacion?");
         System.out.println("1:Ingresar, 2:Registrarse");
-        int eleccion = entrada.nextInt();
-        if(eleccion == 1){
+        String eleccion = entrada.next();
+        if(eleccion.equals("1")){
         System.out.println("Nombre de usuario:");
             String nombreusuarioscn = entrada.next();
                 msj(out,nombreusuarioscn);
@@ -32,9 +32,9 @@ Scanner entrada = new Scanner (System.in);
                 msj(out,passw);
                 msj(out,"N/A");
                 msj(out,"N/A");
-                //msj(out,"a0");
+                msj(out,eleccion);
         }
-        else if (eleccion == 2){
+        else if (eleccion.equals("2")){
         System.out.println("Nombre de usuario:");
             String nombreusuarioscn = entrada.next();
             msj(out,nombreusuarioscn);
@@ -47,6 +47,7 @@ Scanner entrada = new Scanner (System.in);
         System.out.println("Nombre:");
             String nombrescn = entrada.next();
             msj(out,nombrescn);
+            msj(out,eleccion);
         }
         
     
