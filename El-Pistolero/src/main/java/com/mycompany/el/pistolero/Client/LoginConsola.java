@@ -18,12 +18,16 @@ public class LoginConsola {
         Socket clientSocket = new Socket("127.0.0.1", 6666);
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-Scanner entrada = new Scanner (System.in);
-        System.out.println("Bienvenido, que le gustaria hacer a continuacion?");
-        System.out.println("1:Ingresar, 2:Registrarse");
+while (true){
+pantalla(out);}
+    
+    }
+    static void pantalla(PrintWriter out){
+        Scanner entrada = new Scanner (System.in);
+                System.out.println("Bienvenido, que le gustaria hacer a continuacion?");
+                    System.out.println("1:Ingresar, 2:Registrarse");
         String eleccion = entrada.next();
-        if(eleccion.equals("1")){
+    if(eleccion.equals("1")){
         System.out.println("Nombre de usuario:");
             String nombreusuarioscn = entrada.next();
                 msj(out,nombreusuarioscn);
@@ -33,6 +37,7 @@ Scanner entrada = new Scanner (System.in);
                 msj(out,"N/A");
                 msj(out,"N/A");
                 msj(out,eleccion);
+                System.out.println();
         }
         else if (eleccion.equals("2")){
         System.out.println("Nombre de usuario:");
@@ -48,9 +53,8 @@ Scanner entrada = new Scanner (System.in);
             String nombrescn = entrada.next();
             msj(out,nombrescn);
             msj(out,eleccion);
+            System.out.println("Gracias!,volviendo a la pantalla de login.");
         }
-        
-    
     }
          static void msj(PrintWriter out,String str){
      out.println(str);
