@@ -50,7 +50,8 @@ else if (eleccion.equals("2")){
  System.out.println("passw: "+usuarioent.getPassw());
 System.out.println("Email: "+usuarioent.getEmail());
 System.out.println("nombre: "+usuarioent.getNombre());
-}}
+}
+        }
         public static boolean compararUsuario(Usuario usr1,Usuario usr2){
             if(usr1.getPassw().equals(usr2.getPassw())&usr1.getUsrname().equals(usr2.getUsrname())){
                     return true;
@@ -60,6 +61,7 @@ System.out.println("nombre: "+usuarioent.getNombre());
             }
             
         }
+        
             public static Usuario[] RegUsuario(Usuario arr[], Usuario usuarioreg)
     {
         int i;
@@ -71,6 +73,10 @@ System.out.println("nombre: "+usuarioent.getNombre());
   
         return newarr;
     }
+            public static boolean LogUsuario(Usuario Usuarioent){
+            
+            return login;
+            }
                      static void msj(PrintWriter out,String str){
      out.println(str);
      }
