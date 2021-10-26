@@ -9,7 +9,6 @@ public class Pantalla extends JFrame implements ActionListener{
 	JLabel label1;
 	String texto;
 	private JTextField campo1;
-	private JTextField campo2;
 	Pantalla (int largo, int ancho) {
 		
 		this.setTitle("Titulo de ejemplo");
@@ -33,36 +32,14 @@ public class Pantalla extends JFrame implements ActionListener{
 			}
 			});
 //text
-		campo2 = new JTextField();
-		campo2.setBounds(110,90,150,30);
-		this.add(campo2);
-		texto= campo2.getText();
-		
-		campo2.addActionListener(new ActionListener(){
-			  public void actionPerformed (){
-
-			  }
-
-			@Override
-			public void actionPerformed(ActionEvent e) {				
-			}
-			});
 //label
 		label1 = new JLabel("pulsa entrar");
-		label1.setBounds(150,180,500,30);
+		label1.setBounds(150,150,500,30);
 		this.add(label1);
 //label
 //botón
 		this.boton = new JButton("Entrar");
-
-		boton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				campo2.setText("texto : " + campo1.getText());
-			
-			}
-		
-		});
-		boton.setBounds(135, 130,100, 50);	
+		boton.setBounds(135, 100,100, 50);
 		this.add(boton);
 //botón
 
