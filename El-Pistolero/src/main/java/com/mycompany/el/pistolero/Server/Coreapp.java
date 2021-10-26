@@ -18,10 +18,15 @@ public class Coreapp {
 Socket clientSocket = serverSocket.accept();
 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
+Connection conn = DriverManager.getConnection("127.0.0.1:8889","root","root");
+Statement stmt  = conn.createStatement();
+String sql = "SELECT username, email, passw, nombre" +
+             "FROM Usuario";
             System.out.println("Terminado el setup");
 Usuario[] usrs = new Usuario[0];
 //Usuario usuario2 = new Usuario("Lucas11","lucas@luacs.com","luucas1","Lucas T");
+ResultSet rs = stmt.executeQuery(sql);
+
 while(true){
 Usuario usuarioent = new Usuario();
 usuarioent.setUsrname(in.readLine());
@@ -29,6 +34,7 @@ usuarioent.setPassw(in.readLine());
 usuarioent.setEmail(in.readLine());
 usuarioent.setNombre(in.readLine());
 String eleccion = in.readLine();
+    System.out.println(rs.getString("username"));
 if(eleccion.equals("1")){
     for(int i=0; i<=usrs.length; i++){
 if(compararUsuario(usrs[i],usuarioent)==true){
