@@ -8,15 +8,17 @@ package com.mycompany.el.pistolero.Server;
  * @author fausto
  */
 import java.net.*;
-
+import java.sql;
 import java.io.*;  
 public class Coreapp {
+
         public static void main(String[] args) throws Exception{
             ServerSocket serverSocket = new ServerSocket(6666);
 Socket clientSocket = serverSocket.accept();
 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            System.out.println("Terminado la parte de sockets");
+
+            System.out.println("Terminado el setup");
 Usuario[] usrs = new Usuario[0];
 //Usuario usuario2 = new Usuario("Lucas11","lucas@luacs.com","luucas1","Lucas T");
 while(true){
@@ -73,9 +75,9 @@ System.out.println("nombre: "+usuarioent.getNombre());
   
         return newarr;
     }
-            public static boolean LogUsuario(Usuario Usuarioent){
+            public static void LogUsuario(Usuario Usuarioent){
             
-            return login;
+            //return login;
             }
                      static void msj(PrintWriter out,String str){
      out.println(str);
