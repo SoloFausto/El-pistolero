@@ -8,11 +8,12 @@ package com.mycompany.el.pistolero.Server;
  * @author fausto
  */
 import java.net.*;
-import java.sql;
+import java.sql.*;
 import java.io.*;  
 public class Coreapp {
 
         public static void main(String[] args) throws Exception{
+            
             ServerSocket serverSocket = new ServerSocket(6666);
 Socket clientSocket = serverSocket.accept();
 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
