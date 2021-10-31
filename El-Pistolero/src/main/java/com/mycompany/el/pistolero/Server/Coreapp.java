@@ -18,15 +18,8 @@ public class Coreapp {
 Socket clientSocket = serverSocket.accept();
 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-Connection conn = DriverManager.getConnection("127.0.0.1:8889","root","root");
-Statement stmt  = conn.createStatement();
-String sql = "SELECT username, email, passw, nombre" +
-             "FROM Usuario";
-            System.out.println("Terminado el setup");
-Usuario[] usrs = new Usuario[0];
-//Usuario usuario2 = new Usuario("Lucas11","lucas@luacs.com","luucas1","Lucas T");
-ResultSet rs = stmt.executeQuery(sql);
-
+Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8889/elpistolero","root","root");
+            System.out.println("###########SETUP TERMINADO, EMPEZANDO WHILE#############");
 while(true){
 Usuario usuarioent = new Usuario();
 usuarioent.setUsrname(in.readLine());
@@ -34,58 +27,48 @@ usuarioent.setPassw(in.readLine());
 usuarioent.setEmail(in.readLine());
 usuarioent.setNombre(in.readLine());
 String eleccion = in.readLine();
-    System.out.println(rs.getString("username"));
 if(eleccion.equals("1")){
-    for(int i=0; i<=usrs.length; i++){
-if(compararUsuario(usrs[i],usuarioent)==true){
-msj(out,"OK");
-    System.out.println("Login coorecto");
-break;
-}
-else{
-    msj(out,"NO");
-    System.out.println("AAAAAAAAAAAAAAA");
-}
-}
+    if(LogUsuario(conn,usuarioent)==false){
+        msj(out,"Incorrecto");
+    }
+    else if(LogUsuario(conn,usuarioent)==true){
+    msj(out,"Correcto");
+    };
 }
 else if (eleccion.equals("2")){
-    RegUsuario(usrs,usuarioent);
-    System.out.println("Registriando usuario");
-
+    System.out.println(RegUsuario(conn,usuarioent));
+    System.out.println("RegUsuario");
 }
             System.out.println("Eleccion="+eleccion);
-    System.out.println("Usrs.lengthe="+usrs.length);
  System.out.println("username: "+usuarioent.getUsrname());  
  System.out.println("passw: "+usuarioent.getPassw());
 System.out.println("Email: "+usuarioent.getEmail());
 System.out.println("nombre: "+usuarioent.getNombre());
 }
         }
-        public static boolean compararUsuario(Usuario usr1,Usuario usr2){
-            if(usr1.getPassw().equals(usr2.getPassw())&usr1.getUsrname().equals(usr2.getUsrname())){
-                    return true;
-            }
-            else{
-            return false;
-            }
-            
-        }
-        
-            public static Usuario[] RegUsuario(Usuario arr[], Usuario usuarioreg)
-    {
-        int i;
-        Usuario newarr[] = new Usuario[arr.length+ 1];
-        for (i = 0; i < arr.length; i++)
-            newarr[i] = arr[i];
-  
-        newarr[newarr.length-1] = usuarioreg;
-  
-        return newarr;
+            public static String RegUsuario(Connection conn,Usuario regusuario)throws Exception{
+Statement stmt  = conn.createStatement();
+        String sql = "INSERT INTO Usuario " +
+"VALUES ('"+regusuario.getUsrname()+"', '"+ regusuario.getEmail()+"', '"+ regusuario.getPassw()+"', '"+ regusuario.getNombre()+"');";
+                       System.out.println(sql);
+       stmt.execute(sql);
+       return("Registracion completa!");
     }
-            public static void LogUsuario(Usuario Usuarioent){
-            
-            //return login;
-            }
+        public static boolean LogUsuario(Connection conn, Usuario usuarioent)throws Exception{
+Statement stmt  = conn.createStatement();
+String sql = "SELECT `username`,`passw` FROM `Usuario`\n" +
+" WHERE username = '"+usuarioent.getUsrname()+"'" +
+"  AND passw = '"+usuarioent.getPassw()+"' ;";
+            System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+             if (rs.next() == false) {
+        System.out.println("Usuario no encontrado");
+        return false;
+      } else {
+                 System.out.println("Usuario Encontrado");
+        return true;
+        }
+      }
                      static void msj(PrintWriter out,String str){
      out.println(str);
      }
