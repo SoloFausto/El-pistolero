@@ -15,28 +15,17 @@ import java.io.*;
 import java.net.*;
 public class LoginConsola {
     public static void main(String[] args) throws IOException{
-        Socket clientSocket = new Socket("127.0.0.1", 6666);
+           ServerSocket serverSocket = new ServerSocket(6666);
+       Socket clientSocket = serverSocket.accept();
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         Scanner entrada = new Scanner (System.in);
 while (true){
-                System.out.println("Bienvenido, que le gustaria hacer a continuacion?");
-                    System.out.println("1:Ingresar, 2:Registrarse");
-        String eleccion = entrada.next();
-            if(eleccion.equals("1")){
-            
-            }
-            else if (eleccion.equals("2")){
-            }
-
-pantalla(out);}
+pantalla(out,in,entrada);
+}
     
     }
-    static void pantalla(PrintWriter out)throws IOException{
-                Socket clientSocket = new Socket("127.0.0.1", 6666);
-        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-        Scanner entrada = new Scanner (System.in);
+    static void pantalla(PrintWriter out,BufferedReader in,Scanner entrada)throws IOException{
                 System.out.println("Bienvenido, que le gustaria hacer a continuacion?");
                     System.out.println("1:Ingresar, 2:Registrarse");
         String eleccion = entrada.next();
@@ -50,8 +39,16 @@ pantalla(out);}
                 msj(out,"N/A");
                 msj(out,"N/A");
                 msj(out,eleccion);
-                System.out.println();
-                
+                String resultado = in.readLine();
+                                    System.out.println(resultado);
+                int intentos = 0;
+                if(resultado.equals("UsrNC")){
+                    System.out.println("Nombre de usuario o contraseña incorrecta");
+                }
+                else if (resultado.equals("UsrSC")){
+                    System.out.println("Bienvenido!");
+
+                }
         }
         else if (eleccion.equals("2")){
             pantreg(entrada,out);

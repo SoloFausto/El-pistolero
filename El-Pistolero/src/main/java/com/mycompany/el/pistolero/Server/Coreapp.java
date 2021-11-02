@@ -13,9 +13,7 @@ import java.io.*;
 public class Coreapp {
 
         public static void main(String[] args) throws Exception{
-            
-            ServerSocket serverSocket = new ServerSocket(6666);
-Socket clientSocket = serverSocket.accept();
+ Socket clientSocket = new Socket("127.0.0.1", 6666);
 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8889/elpistolero","root","root");
@@ -28,12 +26,12 @@ usuarioent.setEmail(in.readLine());
 usuarioent.setNombre(in.readLine());
 String eleccion = in.readLine();
 if(eleccion.equals("1")){
-    if(LogUsuario(conn,usuarioent)==false){
-        msj(out,"Incorrecto");
-    }
-    else if(LogUsuario(conn,usuarioent)==true){
-    msj(out,"Correcto");
-    };
+if(LogUsuario(conn,usuarioent)==false){
+msj(out,"UsrNC");
+}
+else if (LogUsuario(conn,usuarioent)==true){
+msj(out,"UsrSC");
+}
 }
 else if (eleccion.equals("2")){
     System.out.println(RegUsuario(conn,usuarioent));
@@ -48,7 +46,7 @@ System.out.println("nombre: "+usuarioent.getNombre());
         }
             public static String RegUsuario(Connection conn,Usuario regusuario)throws Exception{
 Statement stmt  = conn.createStatement();
-        String sql = "INSERT INTO Usuario " +
+        String sql = "INSERT INTO `Usuario`(`username`, `email`, `passw`, `nombre`)" +
 "VALUES ('"+regusuario.getUsrname()+"', '"+ regusuario.getEmail()+"', '"+ regusuario.getPassw()+"', '"+ regusuario.getNombre()+"');";
                        System.out.println(sql);
        stmt.execute(sql);
@@ -63,10 +61,10 @@ String sql = "SELECT `username`,`passw` FROM `Usuario`\n" +
             ResultSet rs = stmt.executeQuery(sql);
              if (rs.next() == false) {
         System.out.println("Usuario no encontrado");
-        return false;
+return false;
       } else {
                  System.out.println("Usuario Encontrado");
-        return true;
+ return true;
         }
       }
                      static void msj(PrintWriter out,String str){
