@@ -10,7 +10,7 @@ package com.mycompany.el.pistolero.Server;
 import java.net.*;
 import java.sql.*;
 import java.io.*;  
-public class Coreapp {
+public class CoreappDEBUG {
 
 public static void main(String[] args) throws Exception{
     ServerSocket serverSocket = new ServerSocket(6666);

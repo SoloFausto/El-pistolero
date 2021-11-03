@@ -15,8 +15,9 @@ import java.io.*;
 import java.net.*;
 public class LoginConsola {
     public static void main(String[] args) throws IOException, InterruptedException{
-           ServerSocket serverSocket = new ServerSocket(6666);
-       Socket clientSocket = serverSocket.accept();
+Socket clientSocket = new Socket("127.0.0.1",6666);
+//ServerSocket serverSocket = new ServerSocket(6666);
+//Socket clientSocket = serverSocket.accept();
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         Scanner entrada = new Scanner (System.in);
@@ -26,16 +27,18 @@ while (true){
                             String eleccion = entrada.next();
                     if(eleccion.equals("1")){
                         pantlog(out,in,entrada);
+                        msj(out,eleccion);
                     }
                     else if (eleccion.equals("2")){
                     pantreg(entrada,out);
+                    msj(out,eleccion);
                     }
                     else{System.out.println("Eleccion incorrecta,porfavor ingrese una opcion valida");}
 }
     
 }
 
-     void pantlog(PrintWriter out,BufferedReader in,Scanner entrada) throws IOException, InterruptedException{
+    static void pantlog(PrintWriter out,BufferedReader in,Scanner entrada) throws IOException, InterruptedException{
         String eleccion = "1";
             System.out.println("Nombre de usuario:");
             String nombreusuarioscn = entrada.next();
