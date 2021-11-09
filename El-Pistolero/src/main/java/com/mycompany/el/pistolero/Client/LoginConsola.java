@@ -9,7 +9,8 @@ package com.mycompany.el.pistolero.Client;
  * @author fausto
  */
 import com.mycompany.el.pistolero.Server.Usuario;
-    
+    import java.net.http.HttpClient;
+
         import java.util.Scanner;
 import java.io.*;
 import java.net.*;
@@ -56,23 +57,9 @@ while (true){
                 if(resultado.equals("UsrNC")){
 
                     System.out.println("Nombre de usuario o contraseña incorrecta");
-                    intentos++;
-                    System.out.println("numint "+intentos);
-                    System.out.println("segundos a esperar"+esperar);
-                    if(intentos % 3 == 0){
-                        System.out.println("Intentaste entrar muchas veces,por favor espera "+ esperar+" segundos");
-                        System.out.println("numint "+intentos);
-                        Thread.sleep(esperar);
-                       int newsperar = esperar + 10000;
-                       esperar = newsperar;
-                       System.out.println("segundos a esperar"+esperar);
-                    }
                 }
                 else if (resultado.equals("UsrSC")){
                     System.out.println("Bienvenido!");
-                    intentos = 0;
-                    esperar = 10000;
-
                 }
     
     }

@@ -10,6 +10,8 @@ package com.mycompany.el.pistolero.Server;
 import java.net.*;
 import java.sql.*;
 import java.io.*;  
+import com.sun.net.httpserver.HttpServer;
+
 public class Coreapp {
 
 public static void main(String[] args) throws Exception{
@@ -18,7 +20,7 @@ public static void main(String[] args) throws Exception{
     Socket clientSocket = serverSocket.accept();
     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8889/elpistolero","root","root");
     System.out.println("###########SETUP TERMINADO, EMPEZANDO WHILE#############");
         while(true){
             Usuario usuarioent = new Usuario();

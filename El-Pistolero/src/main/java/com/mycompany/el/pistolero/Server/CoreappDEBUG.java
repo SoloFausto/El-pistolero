@@ -36,6 +36,7 @@ public static void main(String[] args) throws Exception{
             System.out.println(eleccion);
             if(eleccion.equals("1")){
                 if(logUsuario(conn,usuarioent)==false){
+                    int e = 0;
                     msj(out,"UsrNC");
                 }
                 else if (logUsuario(conn,usuarioent)==true){
