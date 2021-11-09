@@ -7,20 +7,24 @@ package com.mycompany.el.pistolero.Server;
  *
  * @author fausto
  */
+import com.sun.net.httpserver.HttpServer;
 import java.net.*;
 import java.sql.*;
 import java.io.*;  
 public class CoreappDEBUG {
 
 public static void main(String[] args) throws Exception{
-    ServerSocket serverSocket = new ServerSocket(6666);
+    //ServerSocket serverSocket = new ServerSocket(6666);
     //Socket clientSocket = new Socket("127.0.0.1", 6666);
-    Socket clientSocket = serverSocket.accept();
-    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    //Socket clientSocket = serverSocket.accept();
+    //PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+    //BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    HttpServer server = HttpServer.create(new InetSocketAddress(8080),0);
+    
     Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
+    server.createContext("/login", new LoginHandler());
     System.out.println("###########SETUP TERMINADO, EMPEZANDO WHILE#############");
-        while(true){
+
             Usuario usuarioent = new Usuario();
                 System.out.println("Creado un nuevo usuario");
             usuarioent.setUsrname(in.readLine());
@@ -36,7 +40,6 @@ public static void main(String[] args) throws Exception{
             System.out.println(eleccion);
             if(eleccion.equals("1")){
                 if(logUsuario(conn,usuarioent)==false){
-                    int e = 0;
                     msj(out,"UsrNC");
                 }
                 else if (logUsuario(conn,usuarioent)==true){
@@ -46,7 +49,7 @@ public static void main(String[] args) throws Exception{
             else if (eleccion.equals("2")){
                 regUsuario(conn,usuarioent);
             }
-        }
+        
         
     }
 
@@ -73,8 +76,8 @@ public static boolean logUsuario(Connection conn, Usuario usuarioent)throws Exce
         }
     }
 
-static void msj(PrintWriter out,String str){
-     out.println(str);
-    }
+//static void msj(PrintWriter out,String str){
+  //   out.println(str);
+    //}
   
 }
