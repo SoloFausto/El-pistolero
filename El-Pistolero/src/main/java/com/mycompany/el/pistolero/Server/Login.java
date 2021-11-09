@@ -12,8 +12,13 @@ import com.sun.net.httpserver.HttpServer;
  *
  * @author fausto
  */
+
 public class Login implements HttpHandler {
     @Override
-    public void handle(HttpExchange) throws IOException{}
+    public void handle(HttpExchange exchange) throws IOException{
+        
+    
+    
+    }
     
 }
