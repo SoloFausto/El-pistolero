@@ -7,6 +7,7 @@ package com.mycompany.el.pistolero.Server;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -23,6 +24,12 @@ public class Registro implements HttpHandler {
     String usuario = keyValues[0].split("=")[1];
     String pass = keyValues[1].split("=")[1];
         System.out.println();
+        String resultado = "pene";
+        byte[] respuesta = resultado.getBytes();
+        exchange.sendResponseHeaders(200, respuesta.length);
+        OutputStream outputStream = exchange.getResponseBody();
+        outputStream.write(respuesta);
+        outputStream.close();
     }
 
      public static void regUsuario(Usuario regusuario)throws Exception{
