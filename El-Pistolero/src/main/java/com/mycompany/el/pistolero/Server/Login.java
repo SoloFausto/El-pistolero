@@ -8,6 +8,8 @@ import java.net.*;
 import java.sql.*;
 import java.io.*;  
 import com.sun.net.httpserver.HttpServer;
+import java.nio.file.Files;
+
 /**
  *
  * @author fausto
@@ -16,22 +18,33 @@ import com.sun.net.httpserver.HttpServer;
 public class Login implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException{
-            String root = "A:/J/INDEX.html";
-       File html = new File (root);
-    String query = exchange.getRequestURI().getQuery();
-    String [] keyValues = query.split("&");
+    URI uri = exchange.getRequestURI();
+    
+String name = new File(uri.getPath()).getName();
+    File path = new File("A:/J", name);
+    Headers h = exchange.getResponseHeaders();
+    h.add("Content-Type", "*/*");
+    OutputStream out = exchange.getResponseBody();
+       String query = exchange.getRequestURI().getQuery();
+       if(query.equals("null")){
+               String [] keyValues = query.split("&");
     String usuario = keyValues[0].split("=")[1];
     String pass = keyValues[1].split("=")[1];
-        System.out.println();
-        String resultado = "pene";
-          exchange.sendResponseHeaders(200, 0);
-      OutputStream os = exchange.getResponseBody();
-      FileInputStream fs = new FileInputStream(html);
-      final byte[] buffer = new byte[0x10000];
-      int count = 0;
-      while ((count = fs.read(buffer)) >= 0) {
-        os.write(buffer,0,count);
+            System.out.println("passw"+pass);
+        System.out.println("usr"+usuario);
+       }
+
+if (path.exists()) {
+      exchange.sendResponseHeaders(200, path.length());
+      out.write(Files.readAllBytes(path.toPath()));
+    } else {
+      System.err.println("File not found: " + path.getAbsolutePath());
+
+      exchange.sendResponseHeaders(200, path.length());
+      out.write(Files.readAllBytes(path.toPath()));
     }
+    out.close();
+
     }
      public static boolean logUsuario(Usuario usuarioent)throws Exception{
          Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
