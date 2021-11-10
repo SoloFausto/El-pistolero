@@ -7,7 +7,7 @@ package com.mycompany.el.pistolero.Server;
  *
  * @author fausto
  */
-import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.*;
 import java.net.*;
 import java.sql.*;
 import java.io.*;  
@@ -20,9 +20,8 @@ public static void main(String[] args) throws Exception{
     //PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
     //BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     HttpServer server = HttpServer.create(new InetSocketAddress(8080),0);
-    
-    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
-    server.createContext("/login", new LoginHandler());
+    server.createContext("/login",new Login());
+    server.createContext("/registro",new Registro());
     System.out.println("###########SETUP TERMINADO, EMPEZANDO WHILE#############");
 
             Usuario usuarioent = new Usuario();
@@ -53,28 +52,7 @@ public static void main(String[] args) throws Exception{
         
     }
 
-public static void regUsuario(Connection conn,Usuario regusuario)throws Exception{
-    Statement stmt  = conn.createStatement();
-    String sql = "INSERT INTO `Usuario`(`username`, `email`, `passw`, `nombre`)" +
-    "VALUES ('"+regusuario.getUsrname()+"', '"+ regusuario.getEmail()+"', '"+ regusuario.getPassw()+"', '"+ regusuario.getNombre()+"');";
-    System.out.println(sql);
-    stmt.execute(sql);
-    }
 
-public static boolean logUsuario(Connection conn, Usuario usuarioent)throws Exception{
-    Statement stmt  = conn.createStatement();
-    String sql = "SELECT `username`,`passw` FROM `Usuario`\n" +
-    " WHERE username = '"+usuarioent.getUsrname()+"'" +
-    "  AND passw = '"+usuarioent.getPassw()+"' ;";
-    System.out.println(sql);
-    ResultSet rs = stmt.executeQuery(sql);
-    if (rs.next() == false){
-        return false;
-    }
-    else{
-        return true;
-        }
-    }
 
 //static void msj(PrintWriter out,String str){
   //   out.println(str);
