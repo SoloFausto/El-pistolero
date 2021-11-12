@@ -9,6 +9,8 @@ import java.sql.*;
 import java.io.*;  
 import com.sun.net.httpserver.HttpServer;
 import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,15 +27,8 @@ String name = new File(uri.getPath()).getName();
     Headers h = exchange.getResponseHeaders();
     h.add("Content-Type", "*/*");
     OutputStream out = exchange.getResponseBody();
-       String query = exchange.getRequestURI().getQuery();
-       if(query.equals("null")){
-               String [] keyValues = query.split("&");
-    String usuario = keyValues[0].split("=")[1];
-    String pass = keyValues[1].split("=")[1];
-            System.out.println("passw"+pass);
-        System.out.println("usr"+usuario);
-       }
-
+    String pass = "NULL";
+String usuario = "NULL";
 if (path.exists()) {
       exchange.sendResponseHeaders(200, path.length());
       out.write(Files.readAllBytes(path.toPath()));
@@ -43,8 +38,32 @@ if (path.exists()) {
       exchange.sendResponseHeaders(200, path.length());
       out.write(Files.readAllBytes(path.toPath()));
     }
-    out.close();
+    
+           String query = exchange.getRequestURI().getQuery();
+           if(query.equals("usr=&pass=")){
+       } else {
+               String [] keyValues = query.split("&");
+               usuario = keyValues[0].split("=")[1];
+               pass = keyValues[1].split("=")[1];
+               System.out.println("passw "+pass);
+               System.out.println("usr "+usuario);
+        }
+                       Usuario usuarioent = new Usuario();
+                       usuarioent.setUsrname(usuario);
+                       usuarioent.setPassw(pass);
+        try {
+            if(logUsuario(usuarioent)== true){
+      exchange.sendResponseHeaders(200,1);
+      out.write(1);
 
+            }
+            else{
+            
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    out.close();
     }
      public static boolean logUsuario(Usuario usuarioent)throws Exception{
          Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
