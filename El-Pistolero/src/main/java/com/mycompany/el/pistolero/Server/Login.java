@@ -18,12 +18,13 @@ import java.util.logging.Logger;
  */
 
 public class Login implements HttpHandler{
+        public static int re = 2;
     @Override
     public void handle(HttpExchange exchange) throws IOException{
     URI uri = exchange.getRequestURI();
-    
+
 String name = new File(uri.getPath()).getName();
-    File path = new File("/Users/fausto/NetBeansProjects/El-pistolero/J", name);
+    File path = new File("C:/Users/faust/Documents/GitHub/El-pistolero/J", name);
     Headers h = exchange.getResponseHeaders();
     h.add("Content-Type", "*/*");
     OutputStream out = exchange.getResponseBody();
@@ -39,7 +40,6 @@ if (path.exists()) {
       exchange.sendResponseHeaders(200, path.length());
       out.write(Files.readAllBytes(path.toPath()));
     }
-    
            String query = exchange.getRequestURI().getQuery();
            if(query.equals("usr=&pass=")){
        } else {
@@ -54,11 +54,12 @@ if (path.exists()) {
                        usuarioent.setPassw(pass);
         try {
             if(logUsuario(usuarioent)== true){
-                
-                System.out.println("Usuario Logeado");
+                System.out.println(re);
+            re = 1;
             }
             else{
-            
+                System.out.println(re);
+            re = 0;
             }
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,7 +68,7 @@ if (path.exists()) {
 
     }
      public static boolean logUsuario(Usuario usuarioent)throws Exception{
-         Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8889/elpistolero","root","root");
+         Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
     Statement stmt  = conn.createStatement();
     String sql = "SELECT `username`,`passw` FROM `Usuario`\n" +
     " WHERE username = '"+usuarioent.getUsrname()+"'" +

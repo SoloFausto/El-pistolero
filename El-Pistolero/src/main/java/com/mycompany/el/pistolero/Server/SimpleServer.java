@@ -4,12 +4,17 @@
  */
 package com.mycompany.el.pistolero.Server;
 
-/**
- *
- * @author fausto
- */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.nio.ByteBuffer;
+import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -23,9 +28,7 @@ public class SimpleServer extends WebSocketServer {
 
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
-		conn.send("Welcome to the server!"); //This method sends a message to the new client
-		broadcast( "new connection: " + handshake.getResourceDescriptor() ); //This method sends a message to all clients connected
-		System.out.println("new connection to " + conn.getRemoteSocketAddress());
+
 	}
 
 	@Override
@@ -36,13 +39,21 @@ public class SimpleServer extends WebSocketServer {
 	@Override
 	public void onMessage(WebSocket conn, String message) {
 		System.out.println("received message from "	+ conn.getRemoteSocketAddress() + ": " + message);
+                System.out.println(message);
+                String resting = Integer.toString(Login.re);
+                System.out.println(resting);
+                if(message.equals("PUTA")){
+                    System.out.println("mandando resting");
+                    conn.send(resting);
+                    
+                }
 	}
 
 	@Override
 	public void onMessage( WebSocket conn, ByteBuffer message ) {
 		System.out.println("received ByteBuffer from "	+ conn.getRemoteSocketAddress());
-	}
 
+	}
 	@Override
 	public void onError(WebSocket conn, Exception ex) {
 		System.err.println("an error occurred on connection " + conn.getRemoteSocketAddress()  + ":" + ex);
@@ -53,12 +64,11 @@ public class SimpleServer extends WebSocketServer {
 		System.out.println("server started successfully");
 	}
 
-public static void main(String[] args) {
+
+	public static void main(String[] args) {
 		String host = "localhost";
 		int port = 8887;
-		WebSocket server = new SimpleServer(new InetSocketAddress(host, port));
-		server.run();
-                                conn.send(args);
+		WebSocketServer server = new SimpleServer(new InetSocketAddress(host, port));
+                server.run();
 	}
-
 }

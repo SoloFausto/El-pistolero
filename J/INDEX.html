@@ -84,8 +84,36 @@
     	color: #fff;
     }
     </style>
-<script>
-alert
+<script type="text/javascript">
+myStorage = window.sessionStorage;
+sessionStorage.setItem('login', '2');
+
+socket = new WebSocket('ws://localhost:8887');
+
+socket.addEventListener('open', function (event) {
+    socket.send('Hello Server!');
+});
+console.log(socket.readyState);
+
+socket.addEventListener('message', function (event) {
+    socket.send('PUTA')
+  var string1 = event.data;
+  var string2 = "1"
+  var resultado = string1.localeCompare(string2)
+  if (resultado == 0) {
+        alert("Hello! I am an alert box!!");
+  } else {
+          alert("NOOOOOOOOOO");
+  }
+    console.log('Message from server ', event.data);
+});
+
+var sender = function (event){
+  let data = sessionStorage.getItem('login');
+  socket.send('PUTA')
+
+};
+window.addEventListener('submit', sender, false);
 </script>
    </head>
 
@@ -93,8 +121,8 @@ alert
    	<div class="login-box">
    		<img class="avatar" src="logo.png" alt="Logo de FAzt">
    		<h1>Inicia Sesion</h1>
-   		<form action="http://localhost:8080/login/index.html" method="get">
-
+   		<form action="INDEX.html" method="get">
+<!--http://localhost:8080/login/index.html-->
    			<!--USERNAME-->
    			<label for="username">Usuario</label>
    			<input type="text" placeholder="Ingrese Usuario" name="usr">
@@ -103,10 +131,16 @@ alert
    			<label for="username">Contraseña</label>
    			<input type="text" placeholder="Ingrese Contraseña" name="pass">
 
-   			<input type="submit" value="Iniciar Sesion">
+   			<input id='myBtn' type="submit" value="Iniciar Sesion">
+        <button onclick="sender()">Login</button>
 
 </form>
    			<a href="/registro/Register.html">Registrate Aqui</a>
 </div>
+<p>Click on the following button for calling the function: </p>
+      <form>
+         <input type = "button" onclick = "socket.send('PUTA')">
+      </form>
+      <p>
 </body>
 </html>
