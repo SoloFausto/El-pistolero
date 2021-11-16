@@ -55,10 +55,11 @@ String usuario = "NULL";
             else{
     Statement stmt  = conn.createStatement();
                  String sql = "UPDATE `Usuario`\n" +
-"SET veceslog= veceslog + 1\n" +
+"SET veceslog = veceslog + 1\n" +
 " WHERE username = '"+usuarioent.getUsrname()+"' ;";
                      System.out.println(sql);
                          Boolean rs = stmt.execute(sql);
+                         if(rs==true){
                          String sql2 = "SELECT `veceslog` FROM `usuario` WHERE username = '"+usuarioent.getUsrname()+"' ;";
                              System.out.println(sql2);
                         ResultSet rs2 = stmt.executeQuery(sql2);
@@ -73,7 +74,7 @@ String usuario = "NULL";
 "SET veceslog = 0" +
 " WHERE username = '"+usuarioent.getUsrname()+"' ;";
                         Boolean rs3 = stmt.execute(sql3);
-                        }
+                        }}
                         else{
                 String verdadera = "Usuario o contraseña incorrecto, intentalo devuelta!";
                 byte[] respuesta = verdadera.getBytes();
