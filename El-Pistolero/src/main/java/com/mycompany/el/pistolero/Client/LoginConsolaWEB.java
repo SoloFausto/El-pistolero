@@ -9,7 +9,7 @@ package com.mycompany.el.pistolero.Client;
  * @author fausto
  */
 import com.mycompany.el.pistolero.Server.Usuario;
-    import java.net.http.HttpClient;
+import java.net.http.HttpClient;
 import java.util.Scanner;
 import java.io.*;
 import java.net.*;
@@ -22,51 +22,51 @@ public class LoginConsolaWEB {
 
 
         Scanner entrada = new Scanner (System.in);
-while (true){
-                    System.out.println("Bienvenido, que le gustaria hacer a continuacion?");
-                    System.out.println("1:Ingresar, 2:Registrarse");
-                            String eleccion = entrada.next();
-                    if(eleccion.equals("1")){
-           System.out.println("Nombre de usuario:");
-            String usuario = entrada.next();
-        System.out.println("Contraseña:");
-            String passw = entrada.next();
-            HttpClient client = HttpClient.newHttpClient();
-
-    HttpRequest requestlog = HttpRequest.newBuilder(
-    URI.create("http://localhost:8080/login?usr="+usuario+"&pass="+passw))
-    .version(HttpClient.Version.HTTP_2)
-    .GET()
-    .build();
-   HttpResponse<String> response = client
-     .send(requestlog, BodyHandlers.ofString());
-                        System.out.println(response.body());
+        while (true){
+            System.out.println("Bienvenido, que le gustaria hacer a continuacion?");
+            System.out.println("1:Ingresar, 2:Registrarse");
+            String eleccion = entrada.next();
+                if(eleccion.equals("1")){
+                    System.out.println("Nombre de usuario:");
+                    String usuario = entrada.next();
+                    System.out.println("Contraseña:");
+                    String passw = entrada.next();
+                    Usuario usuarioent = new Usuario();
+                    usuarioent.setUsrname(usuario);
+                    HttpClient client = HttpClient.newHttpClient();
+                    HttpRequest requestlog = HttpRequest.newBuilder(
+                    URI.create("http://localhost:8080/login?usr="+usuario+"&pass="+passw))
+                    .version(HttpClient.Version.HTTP_2)
+                    .GET()
+                    .build();
+                    HttpResponse<String> response = client
+                    .send(requestlog, BodyHandlers.ofString());
+                    String t = response.body();
+                    System.out.println(t);
+                }
+                else if (eleccion.equals("2")){
+                    System.out.println("Nombre de usuario:");
+                    String nombreusuarioscn = entrada.next();
+                    System.out.println("Contraseña:");
+                    String passw = entrada.next();
+                    System.out.println("Email:");
+                    String emailscn = entrada.next();
+                    System.out.println("Nombre:");
+                    String nombrescn = entrada.next();
+                    System.out.println("Gracias!,volviendo a la pantalla de login.");
+                    HttpClient client = HttpClient.newHttpClient();
+                    HttpRequest requestlog = HttpRequest.newBuilder(
+                        URI.create("http://localhost:8080/registro?usuarios="+nombreusuarioscn+"&nombre="+nombrescn+"&correo="+emailscn+"&contra="+passw))
+                        .version(HttpClient.Version.HTTP_2)
+                        .GET()
+                        .build();
+                    HttpResponse<String> response = client
+                        .send(requestlog, BodyHandlers.ofString());
+                    System.out.println(response.body());    
                     }
-                    else if (eleccion.equals("2")){
-System.out.println("Nombre de usuario:");
-            String nombreusuarioscn = entrada.next();
-        System.out.println("Contraseña:");
-            String passw = entrada.next();
-        System.out.println("Email:");
-            String emailscn = entrada.next();
-        System.out.println("Nombre:");
-            String nombrescn = entrada.next();
-            System.out.println("Gracias!,volviendo a la pantalla de login.");
-            HttpClient client = HttpClient.newHttpClient();
-                HttpRequest requestlog = HttpRequest.newBuilder(
-    URI.create("http://localhost:8080/registro?usuarios="+nombreusuarioscn+"&nombre="+nombrescn+"&correo="+emailscn+"&contra="+passw))
-    .version(HttpClient.Version.HTTP_2)
-    .GET()
-    .build();
-    HttpResponse<String> response = client
-    .send(requestlog, BodyHandlers.ofString());
-                        System.out.println(response.body());    
-                    }
-                    else{System.out.println("Eleccion incorrecta,porfavor ingrese una opcion valida");}
-}
-    
-}
-
-
-    
+                else{
+                    System.out.println("Eleccion incorrecta,porfavor ingrese una opcion valida");
+                }
+        }
+    }    
 }

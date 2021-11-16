@@ -14,12 +14,12 @@ public class Usuario {
     String passw;
     String nombre;
     public Usuario(){}
-public Usuario(String Usrname,String passw,String email,String nombre){
-            this.Usrname = Usrname;
-            this.email = email;
-            this.nombre = nombre;
-            this.passw = passw;
-        }
+    public Usuario(String Usrname,String passw,String email,String nombre){
+        this.Usrname = Usrname;
+        this.email = email;
+        this.nombre = nombre;
+        this.passw = passw;
+    }
     public String getUsrname() {
         return Usrname;
     }
