@@ -65,10 +65,11 @@ public class Login implements HttpHandler{
                     Statement stmt3  = conn.createStatement();
                     String sql2 = "SELECT `veceslog` FROM `usuario` WHERE username = '"+usuarioEntrada.getUsrname()+"' ;";
                     System.out.println(sql2);
-                    ResultSet rs = stmt0.executeQuery(sql2);
+                    ResultSet rs = stmt3.executeQuery(sql2);
                     rs.next();
                     Boolean rs2 = stmt1.execute(sql2);
-                    if(rs2==true){                           // Con este if nos aseguramos que el nombre de usuario exista en la base de datos
+                    System.out.println(rs2);
+                    if(rs2 == true){                           // Con este if nos aseguramos que el nombre de usuario exista en la base de datos
                         String sql3 = "UPDATE `Usuario`\n" +
                         "SET veceslog = veceslog + 1\n" +
                         " WHERE username = '"+usuarioEntrada.getUsrname()+"' ;"; // Le sumamos +1 a la cantidad de intentos que lleva el usuario.
