@@ -21,22 +21,9 @@ public class Registro implements HttpHandler {
     URI uri = exchange.getRequestURI();
     
 String name = new File(uri.getPath()).getName();
-    File path = new File("/Users/fausto/NetBeansProjects/El-pistolero/J", name);
-    Headers h = exchange.getResponseHeaders();
-    h.add("Content-Type", "*/*");
     OutputStream out = exchange.getResponseBody();
-    String pass = "NULL";
-//String usuario = "NULL";
-if (path.exists()) {
-      exchange.sendResponseHeaders(200, path.length());
-      out.write(Files.readAllBytes(path.toPath()));
-    } else {
-      System.err.println("File not found: " + path.getAbsolutePath());
 
-      exchange.sendResponseHeaders(200, path.length());
-      out.write(Files.readAllBytes(path.toPath()));
-    }
-    
+
 String query = exchange.getRequestURI().getQuery();
 
 
@@ -57,14 +44,23 @@ usuarioent.setPassw(contra);
 usuarioent.setEmail(correo);
 usuarioent.setNombre(nombre);
         try {
+            
             regUsuario(usuarioent);
+                String verdadera = "Usuario registrado!";
+                byte[] respuesta = verdadera.getBytes();
+                exchange.sendResponseHeaders(200, respuesta.length);
+                out.write(respuesta);
         } catch (Exception ex) {
+                String verdadera = "Se ha producido un error.";
+                byte[] respuesta = verdadera.getBytes();
+                exchange.sendResponseHeaders(200, respuesta.length);
+                out.write(respuesta);
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
     }
 public static void regUsuario(Usuario regusuario)throws Exception{
-             Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8889/elpistolero","root","root");
+             Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
     Statement stmt  = conn.createStatement();
     String sql = "INSERT INTO `Usuario`(`username`, `email`, `passw`, `nombre`)" +
     "VALUES ('"+regusuario.getUsrname()+"', '"+ regusuario.getEmail()+"', '"+ regusuario.getPassw()+"', '"+ regusuario.getNombre()+"');";
