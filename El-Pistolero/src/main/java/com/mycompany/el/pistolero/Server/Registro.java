@@ -51,7 +51,7 @@ public class Registro implements HttpHandler {
         }
     }
     public static void regUsuario(Usuario regusuario)throws Exception{
-        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8889/elpistolero","root","root");
         Statement stmt  = conn.createStatement();
         String sql = "INSERT INTO `Usuario`(`username`, `email`, `passw`, `nombre`)" +
         "VALUES ('"+regusuario.getUsrname()+"', '"+ regusuario.getEmail()+"', '"+ regusuario.getPassw()+"', '"+ regusuario.getNombre()+"');";
