@@ -25,10 +25,4 @@ public static void main(String[] args) throws Exception{
 
     }
 
-
-
-//static void msj(PrintWriter out,String str){
-  //   out.println(str);
-    //}
-  
 }

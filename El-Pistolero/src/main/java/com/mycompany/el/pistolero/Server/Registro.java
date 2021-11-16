@@ -13,35 +13,35 @@ import java.util.logging.Logger;
  * @author fausto
  */
 
-// http://localhost:8080/registro?usuarios=fs&apellidos=ad&correo=dsaw%40dsa.com&nombre=rrr
+
 
 public class Registro implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException{
         OutputStream out = exchange.getResponseBody();
         String query = exchange.getRequestURI().getQuery();
-        if(query.equals("usuarios=&apellidos=&correo=&nombre=")){
+        if(query.equals("usuarios=&apellidos=&correo=&nombre=")){ // Si la URI no tiene datos de login, la ignoramos
             out.close();
         } 
         else {
             String [] keyValues = query.split("&");
             String usuario = keyValues[0].split("=")[1];
-            String nombre = keyValues[1].split("=")[1];
+            String nombre = keyValues[1].split("=")[1];  // Separamos la URI en 4 valores distintos
             String correo = keyValues[2].split("=")[1];
             String contra = keyValues[3].split("=")[1];
             Usuario usuarioent = new Usuario();
             usuarioent.setUsrname(usuario);
             usuarioent.setPassw(contra);
             usuarioent.setEmail(correo);
-            usuarioent.setNombre(nombre);
+            usuarioent.setNombre(nombre);  // Creamos una nueva instancia Usuario y le llenamos los valores
             try {
-                regUsuario(usuarioent);
+                regUsuario(usuarioent);       // Llamamos al metodo regUsuario para registrar al usuario
                 String verdadera = "Usuario registrado!";
                 byte[] respuesta = verdadera.getBytes();
                 exchange.sendResponseHeaders(200, respuesta.length);
                 out.write(respuesta);
             }
-            catch (Exception ex) {
+            catch (Exception ex) {      // Si no se puede, mandamos un mensaje de error
                 String verdadera = "Se ha producido un error.";
                 byte[] respuesta = verdadera.getBytes();
                 exchange.sendResponseHeaders(200, respuesta.length);

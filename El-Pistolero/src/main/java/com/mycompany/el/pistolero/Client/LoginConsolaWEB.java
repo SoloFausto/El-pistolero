@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 public class LoginConsolaWEB {
     public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException{
-        HttpClient.newBuilder();
+        HttpClient.newBuilder(); 
 
 
         Scanner entrada = new Scanner (System.in);
@@ -35,14 +35,14 @@ public class LoginConsolaWEB {
                     usuarioent.setUsrname(usuario);
                     HttpClient client = HttpClient.newHttpClient();
                     HttpRequest requestlog = HttpRequest.newBuilder(
-                    URI.create("http://localhost:8080/login?usr="+usuario+"&pass="+passw))
+                    URI.create("http://localhost:8080/login?usr="+usuario+"&pass="+passw)) // Creamos una URI con los datos que le mandaremos al servidor
                     .version(HttpClient.Version.HTTP_2)
                     .GET()
                     .build();
-                    HttpResponse<String> response = client
+                    HttpResponse<String> response = client //Le mandamos los datos al servidor
                     .send(requestlog, BodyHandlers.ofString());
                     String t = response.body();
-                    System.out.println(t);
+                    System.out.println(t); // Imprimimos T que son los datos que nos devolvio el servidor.
                 }
                 else if (eleccion.equals("2")){
                     System.out.println("Nombre de usuario:");
