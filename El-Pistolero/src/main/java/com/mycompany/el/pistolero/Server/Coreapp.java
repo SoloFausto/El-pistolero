@@ -13,7 +13,7 @@ import java.sql.*;
 import java.io.*;  
 import java.util.concurrent.Executors;
 import java.util.concurrent.Executor;
-public class CoreappDEBUG {
+public class Coreapp {
 
 public static void main(String[] args) throws Exception{
     HttpServer server = HttpServer.create(new InetSocketAddress(8080),0);
