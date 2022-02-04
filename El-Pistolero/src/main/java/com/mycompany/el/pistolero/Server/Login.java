@@ -4,7 +4,6 @@
  */
 package com.mycompany.el.pistolero.Server;
 import com.sun.net.httpserver.*;
-import java.net.*;
 import java.sql.*;
 import java.io.*;  
 import java.util.logging.Level;
@@ -21,11 +20,11 @@ public class Login implements HttpHandler{
     public void handle(HttpExchange exchange) throws IOException{
         Connection conn = null;
         OutputStream out = exchange.getResponseBody();
-        try { // Nos conectamos a la base sql
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8889/elpistolero","root","root");
+        try { // Nos conectamos a la base sql (aveces hay que cambiar el puerto)
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root");
         }
         catch (SQLException ex) {
-                String verdadera = "Se ha producido un error interno!";
+                String verdadera = "Error connectandose a la base de datos!";
                 byte[] respuesta = verdadera.getBytes();
                 exchange.sendResponseHeaders(200, respuesta.length);
                 out.write(respuesta);
@@ -48,25 +47,16 @@ public class Login implements HttpHandler{
             usuarioEntrada.setPassw(pass);
             try {
                 if(logUsuario(conn,usuarioEntrada)== true){ // Llamamos a nuestro metodo para ver si el usuario es correcto o no
-                    String verdadera = "OK!";
-                    byte[] respuesta = verdadera.getBytes();
-                    exchange.sendResponseHeaders(200, respuesta.length);
-                    out.write(respuesta);                               // Le mandamos un OK a nuestro cliente
-                     String sql_reset_veces = "UPDATE `Usuario`\n" +
-                        "SET veceslog = 0\n" +
-                        " WHERE username = '"+usuarioEntrada.getUsrname()+"' ;"; 
-                      Statement stmt  = conn.createStatement();
-                      stmt.execute(sql_reset_veces);  // Reseteamos los intentos del usuario.
+                    String loginCorrecto = "Bienvenido usuario!";
+                    byte[] loginRespuestaOk = loginCorrecto.getBytes();
+                    exchange.sendResponseHeaders(200, loginRespuestaOk.length);
+                    out.write(loginRespuestaOk);                               // Le mandamos un OK a nuestro cliente
                 }
-                else if(verusrblk(conn,usuarioEntrada)==true){
-                    String sql1 = "SELECT `veceslog` FROM `usuario` WHERE username = '"+usuarioEntrada.getUsrname()+"';";
-                    String sql2 = """
-                                  UPDATE `Usuario`
-                                  SET veceslog = veceslog + 1 WHERE username = '"""+usuarioEntrada.getUsrname()+"';";
-                    
-                    
-                            
-
+                else{
+                    String loginIncorrecto = "Contraseña o nombre de usuario incorrecto!";
+                    byte[] loginRespuestaInc = loginIncorrecto.getBytes();
+                    exchange.sendResponseHeaders(200, loginRespuestaInc.length);
+                    out.write(loginRespuestaInc);
                 }
             }
             catch (Exception ex) {
@@ -83,19 +73,6 @@ public class Login implements HttpHandler{
         String sql = "SELECT `username`,`passw` FROM `Usuario`\n" +
         " WHERE username = '"+usuarioent.getUsrname()+"'" +
         "  AND passw = '"+usuarioent.getPassw()+"' ;";
-        System.out.println(sql);
-        ResultSet rs = stmt.executeQuery(sql);
-        if (rs.next() == false){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-        public static boolean verusrblk(Connection conn,Usuario usuarioent)throws Exception{
-        Statement stmt  = conn.createStatement();
-        String sql = "SELECT `username` FROM `Usuario`\n" +
-        " WHERE username = '"+usuarioent.getUsrname()+"' ;";
         System.out.println(sql);
         ResultSet rs = stmt.executeQuery(sql);
         if (rs.next() == false){

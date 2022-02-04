@@ -1,10 +1,7 @@
 package com.mycompany.el.pistolero.Server;
 import com.sun.net.httpserver.*;
-import java.net.*;
 import java.sql.*;
 import java.io.*;  
-import com.sun.net.httpserver.HttpServer;
-import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,7 +48,7 @@ public class Registro implements HttpHandler {
         }
     }
     public static void regUsuario(Usuario regusuario)throws Exception{
-        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8889/elpistolero","root","root");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/elpistolero","root","root"); // aveces hay que cambiar el puerto a otro.
         Statement stmt  = conn.createStatement();
         String sql = "INSERT INTO `Usuario`(`username`, `email`, `passw`, `nombre`)" +
         "VALUES ('"+regusuario.getUsrname()+"', '"+ regusuario.getEmail()+"', '"+ regusuario.getPassw()+"', '"+ regusuario.getNombre()+"');";

@@ -41,8 +41,8 @@ public class LoginConsolaWEB {
                     .build();
                     HttpResponse<String> response = client //Le mandamos los datos al servidor
                     .send(requestlog, BodyHandlers.ofString());
-                    String t = response.body();
-                    System.out.println(t); // Imprimimos T que son los datos que nos devolvio el servidor.
+                    String Respuesta = response.body();
+                    System.out.println(Respuesta); // Imprimimos T que son los datos que nos devolvio el servidor.
                 }
                 else if (eleccion.equals("2")){
                     System.out.println("Nombre de usuario:");
