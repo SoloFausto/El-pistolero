@@ -45,6 +45,7 @@ public class Login implements HttpHandler{
             Usuario usuarioEntrada = new Usuario(); // creamos un nuevo usuario con las 2 variables que separamos
             usuarioEntrada.setUsrname(usuario);
             usuarioEntrada.setPassw(pass);
+            
             try {
                 if(logUsuario(conn,usuarioEntrada)== true){ // Llamamos a nuestro metodo para ver si el usuario es correcto o no
                     String loginCorrecto = "Bienvenido usuario!";
@@ -65,7 +66,8 @@ public class Login implements HttpHandler{
                 exchange.sendResponseHeaders(200, respuesta.length);
                 out.write(respuesta);
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                }
+
         }
     }
     public static boolean logUsuario(Connection conn,Usuario usuarioent)throws Exception{
